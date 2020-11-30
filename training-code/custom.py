@@ -2,8 +2,9 @@ import pickle
 import pandas as pd
 import numpy as np
 import yaml
-from typing import List, Optional
+from typing import List, Optional, Any, Dict
 from create_pipeline import make_regressor
+import logging
 
 def fit(
     X: pd.DataFrame,
@@ -41,12 +42,19 @@ def fit(
     -------
     Nothing
     """
-    # Feel free to delete which ever one of these you aren't using
-    with open("/Users/timothy.whittaker/Desktop/git/dr-mlops-git-integration/insurance-lgbm-fit/feature_detail.yaml", "r") as f:
-        feature_type_dict = yaml.load(f, Loader=yaml.FullLoader)
-
-    offset = np.log(X[feature_type_dict["Offset"]].values)
+    offset = np.log(X["Exposure"].values)
     estimator = make_regressor()
     estimator.fit(X, y, model__init_score=offset)
     with open("{}/artifact.pkl".format(output_dir), "wb") as fp:
         pickle.dump(estimator, fp)
+
+def score(data: pd.DataFrame, model: Any, **kwargs: Dict[str, Any]) -> pd.DataFrame:
+    """
+    Predict with the pickled custom model.
+
+    If your model is for classification, you likely want to ensure this function
+    calls `predict_proba()`, whereas for regression it should use `predict()`
+    """
+    offset = data["Exposure"]
+    predictions = np.exp(model.predict(data, model__raw_score=True)) * offset
+    return pd.DataFrame(predictions, columns = ["Predictions"])
