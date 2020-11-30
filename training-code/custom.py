@@ -1,9 +1,9 @@
 import pickle
 import pandas as pd
+import numpy as np
+import yaml
 from typing import List, Optional
 from create_pipeline import make_regressor
-
-
 
 def fit(
     X: pd.DataFrame,
