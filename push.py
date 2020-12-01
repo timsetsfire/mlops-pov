@@ -11,6 +11,7 @@ parser.add_argument("--env-dir", default=None)
 parser.add_argument("--model-dir", default=None)
 parser.add_argument("--logging-level", default="INFO")
 parser.add_argument("--max-wait", default=None)
+parser.add_argument("--update-env", default=False, type=bool)
 
 logging.basicConfig(
     format="{} - %(levelname)s - %(asctime)s - %(message)s".format(__name__)
@@ -64,6 +65,7 @@ def push_model(model_dir, env_dir):
         with open( os.path.join(env_dir, "env-info.yaml"), "r") as f:
             env_config = yaml.load(f, Loader=yaml.FullLoader)
         model_config["environmentID"] = env_config["id"]
+        model_config["environmentVersionID"] = env_config["environmentVersionID"]
 
     logger.info(model_config)
     env_id = model_config["environmentID"]
@@ -112,14 +114,17 @@ def push_model(model_dir, env_dir):
 
     model_config["id"] = cm.id
     model_config["modelVersionID"] = model_version.id
+
     logger.info("update model metadata yaml")
     with open(os.path.join(model_dir,"model-metadata.yaml"), "w") as f:
         yaml.dump(model_config, f) 
                   
-def main(env_dir, model_dir, max_wait): 
+def main(env_dir, model_dir, max_wait, update_env = False): 
     client = dr.Client(os.environ["DATAROBOT_API_TOKEN"], os.environ["DATAROBOT_ENDPOINT"])
     if env_dir is not None:
-        push_environment(env_dir, max_wait)
+        logger.info("updating environment")
+        if update_env:
+            push_environment(env_dir, max_wait)
     if model_dir is not None:
         push_model(model_dir, env_dir)
  
