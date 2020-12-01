@@ -24,15 +24,10 @@ Validate the model on a set of various checks. DRUM only supports missing value 
 
 `drum validation --code-dir ./model --input ./data/loss_cost_demo_inference.csv --target-type regression --docker env`
 
-# Push Execution Environment to MLOps
+# Push Execution Environment and model to MLOps
 
 env-config.yaml should be completed.  if no id is present in the env-config.yaml, an environment is created.  If an id is present, a new version is added to teh environment.   
 
-`python push.py --env-dir ./env --model-dir ./model`
-
-# Push Custom Inference Model to MLOps
-
 model-metadata.yaml should be comleted.  if a model id is present in the yaml, only major version attribute is evaluated.  
 
-`drum push --code-dir ./model --verbose --logging-level info`
-
+`python push.py --env-dir ./env --model-dir ./model`
