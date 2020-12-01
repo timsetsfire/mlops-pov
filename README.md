@@ -20,11 +20,11 @@ python packages
 
 `drum validation --code-dir ./model --input ./data/loss_cost_demo_inference.csv --target-type regression --docker env`
 
-# Push Execution Environment
+# Push Execution Environment to MLOps
 
 `python push.py --env-dir ./env --model-dir ./model`
 
-# Push Custom Inference Model
+# Push Custom Inference Model to MLOps
 
 `drum push --code-dir ./model --verbose --logging-level info`
 
