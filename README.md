@@ -2,8 +2,11 @@ Ford MLOps Showcase
 
 # Requirements
 
-`datarobot==2.23.0b0`
-`datarobot-drum>=1.4.4`
+docker
+
+python packages
+* `datarobot==2.23.0b0`
+* `datarobot-drum` - need to build from source to have all functionality.
 
 # Fit a model using drum
 
