@@ -8,8 +8,10 @@ from sklearn.impute import SimpleImputer
 import lightgbm as lgb
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+import os
 
-with open("/Users/timothy.whittaker/Desktop/git/dr-mlops-git-integration/insurance-lgbm-fit/feature_detail.yaml", "r") as f:
+
+with open(os.path.join(os.environ["code_dir"], "feature_detail.yaml"), "r") as f:
     feature_type_dict = yaml.load(f, Loader=yaml.FullLoader)
 
 numeric_features = feature_type_dict["Numeric"]
