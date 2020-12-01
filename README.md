@@ -6,7 +6,7 @@ docker
 
 python packages
 * `datarobot==2.23.0b0`
-* `datarobot-drum` - need to build from source to have all functionality.
+* `datarobot-drum` - need to build from [source](https://github.com/datarobot/datarobot-user-models) to have all functionality.
 
 # Fit a model using drum
 
