@@ -1,11 +1,12 @@
-name: lgmb-regression
+name: lgbm-regression
 type: training
 targetType: regression
+environmentID: null
 # modelID: optional
-# environmentID: 5e8c889607389fe0f466c72d
 #trainingModel:
 #  trainOnProject: optional project on which to train
 validation:
   # Path is relative to this file
   input: ../data/loss_cost_demo.csv
   targetName: IncurredClaims
+majorVersion: True
