@@ -26,7 +26,7 @@ Validate the model on a set of various checks. DRUM only supports missing value 
 
 # Push Execution Environment to MLOps
 
-env-config.yaml should be completed.  
+env-config.yaml should be completed.  if no id is present in the env-config.yaml, an environment is created.  If an id is present, a new version is added to teh environment.   
 
 `python push.py --env-dir ./env --model-dir ./model`
 
