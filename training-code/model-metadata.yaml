@@ -10,3 +10,14 @@ validation:
   input: ../data/loss_cost_demo.csv
   targetName: IncurredClaims
 majorVersion: True
+targetName: IncurredClaims
+positiveClassLabel: null
+negativeClassLabel: null
+predictionThreshold: null
+language: Python
+description: null
+id: null
+versionId: null
+majorUpdate: null
+trainingData: ../data/loss_cost_demo.csv
+modelVersionID: null
