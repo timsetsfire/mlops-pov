@@ -1,0 +1,5 @@
+description: this is an environment to pair with lgbm model.
+environmentVersionID: 5fc6ba560a5545e81f556cb9
+id: 5fc6b970484115b8a085bf19
+name: lgbm execution environment
+programmingLanguage: python
