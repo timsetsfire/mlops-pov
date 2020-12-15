@@ -1,6 +1,6 @@
-name: lgbm-regression
+name: lgbm-classifier
 type: training
-targetType: regression
+targetType: binary
 environmentID: null
 # modelID: optional
 #trainingModel:
@@ -10,10 +10,13 @@ validation:
   input: ../data/loss_cost_demo.csv
   targetName: IncurredClaims
 majorVersion: True
-# language: Python
+targetName: is_bad
+positiveClassLabel: 1
+negativeClassLabel: 0
+predictionThreshold: 0.17
+language: Python
 description: null
-# id: null
-# versionId: null
-# majorUpdate: null
-# trainingData: ../data/loss_cost_demo.csv
-# modelVersionID: null
+id: null
+versionId: null
+trainingData: ../data/loss_cost_demo.csv
+modelVersionID: null

@@ -5,6 +5,9 @@ import yaml
 from typing import List, Optional, Any, Dict
 import logging
 import os
+import json
+
+
 
 def init(code_dir, **kwargs):
     logging.info("init call, code_dir -> {}".format(code_dir))
@@ -47,10 +50,14 @@ def fit(
     -------
     Nothing
     """
+    code_dir = os.environ["code_dir"]
     from create_pipeline import make_regressor
-    offset = np.log(X["Exposure"].values)
+    from create_data import process_data, write_schema
+
+    X = process_data(code_dir, X)   
+    write_schema(code_dir, X)
     estimator = make_regressor()
-    estimator.fit(X, y, model__init_score = offset)
+    estimator.fit(X, y)
     with open("{}/artifact.pkl".format(output_dir), "wb") as fp:
         pickle.dump(estimator, fp)
 
@@ -61,6 +68,13 @@ def score(data: pd.DataFrame, model: Any, **kwargs: Dict[str, Any]) -> pd.DataFr
     If your model is for classification, you likely want to ensure this function
     calls `predict_proba()`, whereas for regression it should use `predict()`
     """
-    offset = data["Exposure"].values
-    predictions = np.exp(model.predict(data, raw_score=True)) * offset
-    return pd.DataFrame(predictions, columns = ["Predictions"])
+    print(kwargs)
+    code_dir = os.environ["code_dir"]
+    from create_data import process_data
+    data = process_data(code_dir, data)
+    schema = json.load(open("./training-code/schema.json", "r"))
+    feats = list(schema.keys())
+    predictions = model.predict_proba(data[feats])
+    pos_label = kwargs["positive_class_label"]
+    neg_label = kwargs["negative_class_label"]
+    return pd.DataFrame(predictions, columns = [neg_label, pos_label])

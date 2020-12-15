@@ -1,22 +1,22 @@
 import numpy as np
 import pandas as pd
 import yaml
-from sklearn.preprocessing import label_binarize
 from joblib import dump, load
 from category_encoders import OrdinalEncoder
-from sklearn.impute import SimpleImputer
 import lightgbm as lgb
+from sklearn.preprocessing import label_binarize
+from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import os
 
+code_dir = os.environ["code_dir"]
 
-with open(os.path.join(os.environ["code_dir"], "feature_detail.yaml"), "r") as f:
+with open(os.path.join(code_dir, "feature_detail.yaml"), "r") as f:
     feature_type_dict = yaml.load(f, Loader=yaml.FullLoader)
 
 numeric_features = feature_type_dict["Numeric"]
 categorical_features = feature_type_dict["Categorical"]
-offset_col = feature_type_dict["Offset"]
 
 numeric_pipeline = Pipeline(
     steps=[
@@ -44,7 +44,7 @@ dense_preprocessing_pipeline = Pipeline(
     ]
 )
 
-model = lgb.LGBMRegressor(objective="tweedie", learning_rate= 0.08)
+model = lgb.LGBMClassifier()
 
 def make_regressor():
     return Pipeline(steps=[("preprocessing", dense_preprocessing_pipeline), ("model", model)])

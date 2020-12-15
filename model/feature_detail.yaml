@@ -1,0 +1,43 @@
+Categorical:
+- term
+- grade
+- sub_grade
+- emp_title
+- emp_length
+- home_ownership
+- verification_status
+- pymnt_plan
+- purpose
+- title
+- zip_code
+- addr_state
+- initial_list_status
+- state_id
+- addr_state_name
+- addr_state
+- earliest_cr_line day of week
+- earliest_cr_line month of year
+Date:
+- earliest_cr_line
+Numeric: 
+- int_rate
+- loan_amnt
+- funded_amnt
+- installment
+- annual_inc
+- dti
+- delinq_2yrs
+- inq_last_6mths
+- mths_since_last_delinq
+- mths_since_last_record
+- open_acc
+- pub_rec
+- revol_bal
+- revol_util
+- total_acc
+- mths_since_last_major_derog
+- policy_code
+Target: is_bad
+Text:
+- url
+- desc

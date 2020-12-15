@@ -1,6 +1,6 @@
 name: lgbm-regression
 type: training
-targetType: regression
+targetType: binary
 environmentID: null
 # modelID: optional
 #trainingModel:
@@ -8,15 +8,12 @@ environmentID: null
 validation:
   # Path is relative to this file
   input: ../data/loss_cost_demo.csv
-  targetName: IncurredClaims
+  targetName: is_bad
 majorVersion: True
-targetName: IncurredClaims
-positiveClassLabel: null
-negativeClassLabel: null
-predictionThreshold: null
-language: Python
+# language: Python
 description: null
-id: null
-versionId: null
-trainingData: ../data/loss_cost_demo.csv
-modelVersionID: null
+# id: null
+# versionId: null
+# majorUpdate: null
+# trainingData: ../data/loss_cost_demo.csv
+# modelVersionID: null
