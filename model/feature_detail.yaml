@@ -10,7 +10,6 @@ Categorical:
 - purpose
 - title
 - zip_code
-- addr_state
 - initial_list_status
 - state_id
 - addr_state_name

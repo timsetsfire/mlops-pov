@@ -1,22 +1,18 @@
-name: lgbm-classifier
-type: training
-targetType: binary
-environmentID: null
-# modelID: optional
-#trainingModel:
-#  trainOnProject: optional project on which to train
-validation:
-  # Path is relative to this file
-  input: ../data/loss_cost_demo.csv
-  targetName: IncurredClaims
-majorVersion: True
-targetName: is_bad
-positiveClassLabel: 1
-negativeClassLabel: 0
-predictionThreshold: 0.17
-language: Python
 description: null
-id: null
+environmentID: 5fda0b23d33aebb30a492f74
+environmentVersionID: 5fda0b242d986b76e2d33bf8
+id: 5fda0ebe6a248876e1d33b4f
+language: Python
+majorVersion: true
+modelVersionID: 5fda0ebe795704a0730cf507
+name: lgbm-classifier
+negativeClassLabel: 0
+positiveClassLabel: 1
+predictionThreshold: 0.17
+targetName: is_bad
+targetType: binary
+testData: /Users/timothy.whittaker/Desktop/git/ford-mlops/data/10K_LC_short.csv
+testDatasetID: 5fda1387d17fef28458cfc80
+trainingData: /Users/timothy.whittaker/Desktop/git/ford-mlops/data/10K_Lending_Club_Loans_utf-8.csv
+type: inference
 versionId: null
-trainingData: ../data/loss_cost_demo.csv
-modelVersionID: null

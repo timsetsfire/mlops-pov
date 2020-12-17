@@ -20,13 +20,13 @@ categorical_features = feature_type_dict["Categorical"]
 
 numeric_pipeline = Pipeline(
     steps=[
-        ("imputer", SimpleImputer(strategy="median", add_indicator=True)),
+        ("imputer", SimpleImputer(strategy="constant", fill_value=-9999, add_indicator=False)),
     ]
 )
 
 categorical_pipeline = Pipeline(
     steps=[
-        ("imputer", SimpleImputer(strategy="constant", fill_value="missing")),
+        ("imputer", SimpleImputer(strategy="constant", fill_value="missing", add_indicator=False)),
         ("category_encoder", OrdinalEncoder()),
     ]
 )

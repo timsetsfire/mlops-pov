@@ -33,7 +33,11 @@ def write_schema(code_dir, data):
 def process_data(code_dir, data):
     with open(os.path.join(code_dir, "feature_detail.yaml"), "r") as f:
         feature_type_dict = yaml.load(f, Loader=yaml.FullLoader)
+    numeric_features = feature_type_dict["Numeric"]
+    categorical_features = feature_type_dict["Categorical"]
     data = join_state_info(code_dir, data) 
     data = process_dates(code_dir, data)  
     data = clean_up(code_dir, data)  
-    return data
+    cols = data.columns 
+    drop_these = list(set(cols).difference(set(numeric_features)).difference(set(categorical_features)))
+    return data.drop(drop_these, axis=1)
