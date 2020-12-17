@@ -1,4 +1,3 @@
-Ford MLOps Showcase
 
 # Requirements
 
@@ -28,6 +27,6 @@ Validate the model on a set of various checks. DRUM only supports missing value 
 
 env-config.yaml should be completed.  if no id is present in the env-config.yaml, an environment is created.  If an id is present, a new version is added to teh environment.   
 
-model-metadata.yaml should be comleted.  if a model id is present in the yaml, only major version attribute is evaluated.  
+model-config.yaml should be comleted.  if a model id is present in the yaml, only major version attribute is evaluated.  
 
 `python push.py --env-dir ./env --model-dir ./model`
