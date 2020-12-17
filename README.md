@@ -1,4 +1,3 @@
-Ford MLOps Showcase
 
 # Requirements
 
