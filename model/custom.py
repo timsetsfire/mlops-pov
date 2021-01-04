@@ -9,13 +9,16 @@ import json
 from io import BytesIO
 from copy import deepcopy
 from custom_model import CustomModel
-
-
+import platform
+import sys
 
 def init(code_dir, **kwargs):
     logging.info("init call, code_dir -> {}".format(code_dir))
     os.environ["code_dir"] = code_dir
     logging.info("init call, kwargs -> {}".format(kwargs))
+    logging.info(platform.platform())
+    logging.info(sys.path)
+    
 def load_model(input_dir):
    return CustomModel(input_dir)
 

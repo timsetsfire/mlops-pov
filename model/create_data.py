@@ -2,10 +2,21 @@ import pandas as pd
 import os
 import yaml
 import json
-
+# import pyodbc
+import pandas as pd
+import yaml
+from pyathena import connect
 
 def join_state_info(code_dir, data):
+    ## simple dataframe read csv
     state_info = pd.read_csv(os.path.join(code_dir, "data/US_Zip_Code_Validation_Ranges.csv"))
+    ## via athena
+    # creds = yaml.load( open(os.path.join(code_dir,"athena_creds.yaml"), "rb"), Loader=yaml.FullLoader)
+    # conn = connect(aws_access_key_id=creds["AWSAccessKeyId"],
+    #              aws_secret_access_key=creds["AWSSecretKey"],
+    #              s3_staging_dir="s3://cfds-athena-demo2/",
+    #              region_name="ap-south-1")
+    # state_info = pd.read_sql("SELECT * FROM cfds_athena_demo.us_zip_codes", conn)
     df = data.merge(state_info, how="left", left_on = ["zip_code", "addr_state"], right_on = ["zip", "addr_state"])
     return df
 

@@ -9,4 +9,4 @@ scipy==1.5.1
 PyYAML==5.1.1
 category-encoders==2.2.2
 shap==0.37.0
-avro==1.10.0
+pyathena==2.0.2
