@@ -21,3 +21,7 @@ RUN pip3 install -r requirements.txt --no-cache-dir && \
 # Copy the drop-in environment code into the correct directory
 # Code from the custom model tarball can overwrite the code here
 COPY ./ /opt/code/
+
+## this line is just to highlight that we'll be able to install a python package
+## provided internet access
+RUN apt-get install -y git && pip3 install git+https://github.com/jkbr/httpie.git#egg=httpie 
