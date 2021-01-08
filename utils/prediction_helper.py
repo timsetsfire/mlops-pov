@@ -12,8 +12,8 @@ import json
 import requests
  
 API_URL = 'https://mlops.dynamic.orm.datarobot.com/predApi/v1.0/deployments/{deployment_id}/predictions'    # noqa
-API_KEY = 'NWZkMGY2ZTcwZGU1NDkyZjRjMzdlZmU3OjRJeXJrR2dnRHAyb2RpK0JNN2toRkdtTVBtaWVXemVwV3AwQXE1aGJZVWM9'
-DATAROBOT_KEY = '544ec55f-61bf-f6ee-0caf-15c7f919a45d'
+API_KEY = "your-token"
+DATAROBOT_KEY = "your-dr-key"
  
 DEPLOYMENT_ID = '5ff78d092cb534e535a9af6f'
  
