@@ -5,12 +5,6 @@ import argparse
 import logging
 import pprint
 
-from datarobot.mlops.mlops import MLOps
-from datarobot.mlops.common.enums import OutputType
-from datarobot.mlops.connected.client import MLOpsClient
-from datarobot.mlops.common.exception import DRConnectedException
-from datarobot.mlops.constants import Constants
-
 def str2bool(v):
     if isinstance(v, bool):
        return v
@@ -37,6 +31,12 @@ logging.basicConfig(
 logger = logging.getLogger("deploy")
        
 def deploy_external_model(model_dir, token, endpoint, max_wait):
+    from datarobot.mlops.mlops import MLOps
+    from datarobot.mlops.common.enums import OutputType
+    from datarobot.mlops.connected.client import MLOpsClient
+    from datarobot.mlops.common.exception import DRConnectedException
+    from datarobot.mlops.constants import Constants
+
     logger.info("load model config for external deployment")
     try:
         with open( os.path.join(model_dir,"model-config.yaml"), "r") as f:
@@ -168,11 +168,24 @@ def deploy_custom_model(model_dir, token, endpoint, max_wait):
         max_wait = max_wait, 
         default_prediction_server_id = pred_server.id
     )
-    
+    logger.info("enabling data drift tracking")
+    deployment.update_drift_tracking_settings(feature_drift_enabled = True)
     model_config["deploymentID"] = deployment.id
     model_config["deploymentType"] = "custom inference"
     logger.info("update model metadata yaml")
     logger.info(model_config)
+
+    url = "customModels/predictionExplanationsInitialization/"
+    data = {
+        "customModelId": model_config["id"], 
+        "customModelVersionId": model_config["modelVersionID"], 
+    }
+    logger.info("initializing prediction explanations for deployment")
+    try:
+        resp = client.post(url, data=data)
+    except Exception as e:
+        logger.warning(e)
+
     with open(os.path.join(model_dir,"model-config.yaml"), "w") as f:
         yaml.dump(model_config, f) 
 

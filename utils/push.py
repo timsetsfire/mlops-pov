@@ -4,6 +4,16 @@ import os
 import argparse
 import logging
 
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 parser = argparse.ArgumentParser(description="execution environment push")
 # parser.add_argument('integers', metavar='N', type=int, nargs='+',
 #                     help='an integer for the accumulator')
@@ -11,7 +21,7 @@ parser.add_argument("--env-dir", default=None)
 parser.add_argument("--model-dir", default=None)
 parser.add_argument("--logging-level", default="INFO")
 parser.add_argument("--max-wait", default=600, type = int)
-parser.add_argument("--update-env", default=False, type = bool)
+parser.add_argument("--update-env", default=False, type = str2bool)
 
 logging.basicConfig(
     format="{} - %(levelname)s - %(asctime)s - %(message)s".format(__name__)
@@ -80,6 +90,7 @@ def push_model(model_dir, env_dir):
     negative_class_label = model_config.get("negative_class_label")
     prediction_threshold = model_config.get("prediction_threshold")
     major_update = model_config.get("majorVersion")
+    training_data_path = model_config.get("trainingData")
 
     target_type_dict = { 
         "regression": dr.enums.TARGET_TYPE.REGRESSION,
@@ -103,6 +114,12 @@ def push_model(model_dir, env_dir):
     else:
         logger.info("grab existing inference model")
         cm = dr.CustomInferenceModel.get(model_id)
+    logger.info("uploading training data to ai catalog")
+    training_data = dr.Dataset.create_from_file(training_data_path, categories = ["TRAINING"])
+    logger.info("assigning training data to custom model")
+    cm.assign_training_data(training_data.id)
+    model_config["datasets"] = {}
+    model_config["datasets"]["trainingDataCatalogId"] = training_data.id
     
     logger.info("creating a new model version")
     model_version = dr.CustomModelVersion.create_clean(
@@ -123,8 +140,8 @@ def push_model(model_dir, env_dir):
 def main(env_dir, model_dir, max_wait, update_env): 
     client = dr.Client(os.environ["DATAROBOT_API_TOKEN"], os.environ["DATAROBOT_ENDPOINT"])
     if env_dir is not None:
-        logger.info("updating environment")
         if update_env:
+            logger.info("updating environment")
             push_environment(env_dir, max_wait)
     if model_dir is not None:
         push_model(model_dir, env_dir)

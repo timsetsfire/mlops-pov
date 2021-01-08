@@ -29,7 +29,7 @@ def main(model_dir, max_wait):
         logger.info("loading dataset to ai catalog")
         test_dataset = dr.Dataset.create_from_file(file_path = path_to_dataset)
         test_dataset_id = test_dataset.id
-        model_config["testDatasetID"] = test_dataset_id
+        model_config["datasets"]["testDatasetID"] = test_dataset_id
         with open(os.path.join(model_dir,"model-config.yaml"), "w") as f:
             yaml.dump(model_config, f) 
     logger.info("starting custom model test")
