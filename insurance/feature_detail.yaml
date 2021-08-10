@@ -1,0 +1,35 @@
+Categorical:
+- DistributionChannel
+- SydneyRegion
+- VehicleModel
+- VehicleMake
+- ClientType
+- MaritalStatus
+- Gender
+Date: None
+Numeric: 
+- SumInsured
+- NoClaimBonus
+- CustomerTenure
+- DriverAge
+- EngineCapacity
+- NumberOfDrivers
+- VehicleAge
+- NumberOfDrivers
+- CustomerTenure
+- PostCode_Aged_18_24
+- PostCode_Aged_25_29
+- PostCode_Aged_30_39
+- PostCode_Aged_40_44
+- PostCode_Aged_45_49
+- PostCode_Aged_50_59
+- PostCode_Aged_60
+- PostCode_CommuteViaCar
+- PostCode_PersonsPerDwelling
+- PostCode_VehiclesPerDwelling
+- PostCode_annualKm
+- Latitude
+- Longitude
+Offset: Exposure
+Target: IncurredClaims
+Text: None
