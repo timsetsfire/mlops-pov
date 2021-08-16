@@ -14,8 +14,6 @@ Categorical:
 - state_id
 - addr_state_name
 - addr_state
-- earliest_cr_line day of week
-- earliest_cr_line month of year
 Date:
 - null
 Numeric: 
