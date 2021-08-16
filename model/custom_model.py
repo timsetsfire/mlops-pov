@@ -12,7 +12,7 @@ from create_data import process_data
 import os
 import json
 from copy import deepcopy
-import shap
+# import shap
 
 class CustomModel(object):
     def __init__(self, code_dir):
@@ -21,7 +21,7 @@ class CustomModel(object):
         self.schema = json.load(open( os.path.join(code_dir, "schema.json"), "r"))
         with open(os.path.join(code_dir, "feature_detail.yaml"), "r") as f:
             self.feature_type_dict = yaml.load(f, Loader=yaml.FullLoader)
-        self.shap_explainer = shap.TreeExplainer(self.model.steps[-1][1])
+#         self.shap_explainer = shap.TreeExplainer(self.model.steps[-1][1])
         self.transformer = deepcopy(self.model)
         del(self.transformer.steps[-1])
 
