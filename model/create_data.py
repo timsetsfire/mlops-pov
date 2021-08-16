@@ -48,7 +48,7 @@ def process_data(code_dir, data):
     categorical_features = feature_type_dict["Categorical"]
     data = join_state_info(code_dir, data) 
     data = process_dates(code_dir, data)  
-    data = clean_up(code_dir, data)  
+#     data = clean_up(code_dir, data)  
     cols = data.columns 
     drop_these = list(set(cols).difference(set(numeric_features)).difference(set(categorical_features)))
     return data.drop(drop_these, axis=1)
