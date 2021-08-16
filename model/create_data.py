@@ -5,7 +5,7 @@ import json
 # import pyodbc
 import pandas as pd
 import yaml
-from pyathena import connect
+# from pyathena import connect
 
 def join_state_info(code_dir, data):
     ## simple dataframe read csv
