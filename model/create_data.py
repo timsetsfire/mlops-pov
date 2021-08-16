@@ -47,10 +47,15 @@ def process_data(code_dir, data):
     numeric_features = feature_type_dict["Numeric"]
     categorical_features = feature_type_dict["Categorical"]
     data = join_state_info(code_dir, data) 
-    data = process_dates(code_dir, data)  
+    try:
+        data = process_dates(code_dir, data)  
+    except Exception as e:
+        print("something happened when processing dates")
+        print(e)
     try:
         data = clean_up(code_dir, data)  
     except Exception as e:
+        print("something happened when cleaning up percentages")
         print(e)
     cols = data.columns 
     drop_these = list(set(cols).difference(set(numeric_features)).difference(set(categorical_features)))
