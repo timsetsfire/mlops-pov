@@ -34,6 +34,7 @@ class CustomModel(object):
         categorical_features = self.feature_type_dict["Categorical"]
         cols = X.columns
         drop_these = list(set(cols).difference(set(numeric_features)).difference(set(categorical_features)))
+        X = X.drop([drop_these], axis=1)
         data = process_data(self.code_dir, X)
         return data
 
