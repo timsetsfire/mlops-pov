@@ -17,9 +17,8 @@ Categorical:
 - earliest_cr_line day of week
 - earliest_cr_line month of year
 Date:
-- earliest_cr_line
+- null
 Numeric: 
-- int_rate
 - loan_amnt
 - funded_amnt
 - installment
