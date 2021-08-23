@@ -14,9 +14,12 @@ Categorical:
 - state_id
 - addr_state_name
 - addr_state
+- earliest_cr_line day of week
+- earliest_cr_line month of year
 Date:
-- null
+- earliest_cr_line
 Numeric: 
+- int_rate
 - loan_amnt
 - funded_amnt
 - installment
